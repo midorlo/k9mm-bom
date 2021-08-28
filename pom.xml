@@ -1,122 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-   <groupId>com.midorlo</groupId>
-   <artifactId>k9-parent</artifactId>
-   <version>0.0.1-SNAPSHOT</version>
-   <packaging>pom</packaging>
-   
-   <name>k9-parent</name>
+    <groupId>com.midorlo</groupId>
+    <artifactId>k9-bom</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-   <parent>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-parent</artifactId>
-      <version>2.5.3</version>
-      <relativePath/>
-   </parent>
+    <name>k9-parent</name>
 
-   <properties>
-   
-      <!-- Project Properties -->
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-      <java.version>11</java.version>
-	  
-      <!-- Project Dependency Versions -->
-      <spring-boot.version>2.5.3</spring-boot.version>
-      <spring-security-test.version>5.4.6</spring-security-test.version>
-      <jjwt-impl.version>0.11.2</jjwt-impl.version>
-      <jjwt-api.version>0.11.2</jjwt-api.version>
-      <springdoc.version>1.5.9</springdoc.version>
-	  
-      <!-- Project Plugin Versions -->
-      <springdoc-openapi-maven-plugin.version>1.3</springdoc-openapi-maven-plugin.version>
-      <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
-	  
-	  <!-- Custom Properties-->
-	  
-	  
-   </properties>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.3</version>
+        <relativePath/>
+    </parent>
 
-	<!-- Project Plugins Configuration -->
-   <build>     		
-		<pluginManagement>
-		<plugins>
-            <plugin>
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-maven-plugin</artifactId>
-               <executions>
-                  <execution>
-                     <id>pre-integration-test</id>
-                     <goals>
-                        <goal>start</goal>
-                     </goals>
-                  </execution>
-                  <execution>
-                     <id>post-integration-test</id>
-                     <goals>
-                        <goal>stop</goal>
-                     </goals>
-                  </execution>
-               </executions>
-               <configuration>
-                  <excludes>
-                     <exclude>
-                        <groupId>org.projectlombok</groupId>
-                        <artifactId>lombok</artifactId>
-                     </exclude>
-                  </excludes>
-               </configuration>
-            </plugin>
-            <plugin>
-               <groupId>org.springdoc</groupId>
-               <artifactId>springdoc-openapi-maven-plugin</artifactId>
-               <version>${springdoc-openapi-maven-plugin.version}</version>
-               <executions>
-                  <execution>
-                     <phase>integration-test</phase>
-                     <goals>
-                        <goal>generate</goal>
-                     </goals>
-                  </execution>
-               </executions>
-               <configuration>
-                  <outputFileName>openapi.json</outputFileName>
-                  <outputDir>${project.basedir}</outputDir>
-               </configuration>
-            </plugin>
-         </plugins>
-      </pluginManagement>
-   </build>
+    <properties>
+        <!-- Project Properties -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>11</java.version>
+        <!-- Project Dependency Versions -->
+        <spring-boot.version>2.5.3</spring-boot.version>
+        <spring-boot-starter-security.version>2.5.3</spring-boot-starter-security.version>
+        <spring-security-test.version>5.4.6</spring-security-test.version>
+        <jjwt-impl.version>0.11.2</jjwt-impl.version>
+        <jjwt-api.version>0.11.2</jjwt-api.version>
+        <springdoc.version>1.5.9</springdoc.version>
+        <!-- Project Plugin Versions -->
+        <springdoc-openapi-maven-plugin.version>1.3</springdoc-openapi-maven-plugin.version>
+        <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+        <!-- Custom Properties-->
+    </properties>
 
-   <!-- Project Profiles -->
-   <profiles>
-      <profile>
-         <id>dev</id>
-         <properties>
-            <profile.description>Used by Developers to develop and unit test against a local update-only db</profile.description>
-         </properties>
-      </profile>
-      <profile>
-         <id>tst</id>
-         <properties>
-            <profile.description>Used by Developers to integration test against a create-and-delete db</profile.description>
-         </properties>
-      </profile>
-      <profile>
-         <id>int</id>
-         <properties>
-            <profile.description>Used by Jenkins to integration test against a create-and-delete db</profile.description>
-         </properties>
-      </profile>
-      <profile>
-         <id>prod</id>
-         <properties>
-            <profile.description>Production Profile.</profile.description>
-         </properties>
-      </profile>
-   </profiles>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring-boot-starter-security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt-impl.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt-jackson.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>pre-integration-test</id>
+                            <goals>
+                                <goal>start</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>post-integration-test</id>
+                            <goals>
+                                <goal>stop</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springdoc</groupId>
+                    <artifactId>springdoc-openapi-maven-plugin</artifactId>
+                    <version>${springdoc-openapi-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>integration-test</phase>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <outputFileName>openapi.json</outputFileName>
+                        <outputDir>${project.basedir}</outputDir>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profile.description>Used by Developers to develop and unit test against a local update-only db
+                </profile.description>
+            </properties>
+            <repositories>
+                <repository>
+                    <id>my-local-repo</id>
+                    <url>file://${project.basedir}/.repository</url>
+                </repository>
+            </repositories>
+        </profile>
+        <profile>
+            <id>tst</id>
+            <properties>
+                <profile.description>Used by Developers to integration test against a create-and-delete db
+                </profile.description>
+            </properties>
+        </profile>
+        <profile>
+            <id>int</id>
+            <properties>
+                <profile.description>Used by Jenkins to integration test against a create-and-delete db
+                </profile.description>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profile.description>Production Profile.</profile.description>
+            </properties>
+        </profile>
+    </profiles>
+
+    <developers>
+        <developer>
+            <id>mdl</id>
+            <name>Midorlo</name>
+            <email>mdl@posteo.de</email>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
 
 </project>
