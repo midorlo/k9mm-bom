@@ -109,23 +109,23 @@
                     </configuration>
 
                 </plugin>
-                <plugin>
-                    <groupId>org.springdoc</groupId>
-                    <artifactId>springdoc-openapi-maven-plugin</artifactId>
-                    <version>${springdoc-openapi-maven-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <phase>integration-test</phase>
-                            <goals>
-                                <goal>generate</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <outputFileName>openapi.json</outputFileName>
-                        <outputDir>${project.basedir}</outputDir>
-                    </configuration>
-                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>org.springdoc</groupId>-->
+<!--                    <artifactId>springdoc-openapi-maven-plugin</artifactId>-->
+<!--                    <version>${springdoc-openapi-maven-plugin.version}</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <phase>integration-test</phase>-->
+<!--                            <goals>-->
+<!--                                <goal>generate</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                    <configuration>-->
+<!--                        <outputFileName>openapi.json</outputFileName>-->
+<!--                        <outputDir>${project.basedir}</outputDir>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
             </plugins>
         </pluginManagement>
     </build>
